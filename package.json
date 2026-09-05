@@ -1,7 +1,7 @@
 {
   "name": "@fleetia/config",
-  "version": "1.0.0",
-  "description": "Shared ESLint, Prettier, and TypeScript configuration for Fleetia packages.",
+  "version": "2.0.0",
+  "description": "Shared Oxlint, Oxfmt, and TypeScript presets for Fleetia projects.",
   "type": "module",
   "license": "AGPL-3.0-only",
   "homepage": "https://github.com/fleetia/config",
@@ -13,29 +13,80 @@
     "url": "https://github.com/fleetia/config/issues"
   },
   "exports": {
+    "./oxlint": {
+      "types": "./dist/oxlint/base.d.ts",
+      "import": "./dist/oxlint/base.js"
+    },
+    "./oxlint/react": {
+      "types": "./dist/oxlint/react.d.ts",
+      "import": "./dist/oxlint/react.js"
+    },
+    "./oxfmt": {
+      "types": "./dist/oxfmt.d.ts",
+      "import": "./dist/oxfmt.js"
+    },
+    "./tsconfig/base.json": "./tsconfig/base.json",
+    "./tsconfig/react-bundler.json": "./tsconfig/react-bundler.json",
+    "./tsconfig/node.json": "./tsconfig/node.json",
+    "./tsconfig/library.json": "./tsconfig/library.json",
     "./eslint": "./eslint.base.js",
     "./prettier": "./prettier.config.js",
     "./tsconfig.base.json": "./tsconfig.base.json",
     "./package.json": "./package.json"
   },
   "files": [
+    "dist",
+    "tsconfig",
     "README.md",
     "eslint.base.js",
     "prettier.config.js",
     "tsconfig.base.json"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "bin": {
+    "fleetia-config": "./dist/cli.js"
+  },
+  "engines": {
+    "node": "^22.18.0 || >=24.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "test": "node scripts/verify-package.ts",
+    "check": "tsc --noEmit && oxlint && oxfmt --check && node scripts/verify-package.ts",
+    "prepack": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "@eslint/js": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
-    "typescript-eslint": "^8.56.1"
+    "typescript-eslint": "^8.56.1",
+    "oxlint": "1.81.0",
+    "oxfmt": "0.66.0"
   },
   "peerDependencies": {
-    "eslint": "^9.0.0"
+    "eslint": "^9.0.0",
+    "typescript": ">=5.9.0 <8"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "eslint": "9.39.4",
+    "typescript": "5.9.3"
   },
   "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be"
 }
