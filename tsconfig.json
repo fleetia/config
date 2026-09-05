@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig/node.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node"]
+  },
+  "include": ["src", "scripts", "oxlint.config.ts", "oxfmt.config.ts"]
+}
