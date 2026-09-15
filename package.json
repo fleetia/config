@@ -40,7 +40,8 @@
     "README.md",
     "eslint.base.js",
     "prettier.config.js",
-    "tsconfig.base.json"
+    "tsconfig.base.json",
+    ".github/assets"
   ],
   "publishConfig": {
     "access": "public",

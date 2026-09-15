@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/icon-dark.svg">
+  <img src=".github/assets/icon.svg" alt="Fleetia Config" width="64" height="64">
+</picture>
+
 # @fleetia/config
 
 Shared Oxlint, Oxfmt, and TypeScript presets for Fleetia projects. Install the
